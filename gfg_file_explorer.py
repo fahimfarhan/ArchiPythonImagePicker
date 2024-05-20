@@ -1,67 +1,41 @@
 
-# Python program to create 
-# a file explorer in Tkinter
-  
-# import all components
-# from the tkinter library
 from tkinter import *
-  
-# import filedialog module
-from tkinter import filedialog
-  
-# Function for opening the 
-# file explorer window
-def browseFiles():
-    filename = filedialog.askopenfilename(initialdir = "/home/soumic/",
-                                          title = "Select a File",
-                                          filetypes = (("Text files",
-                                                        "*.txt*"),
-                                                       ("all files",
-                                                        "*.*"),
-                                                          ("image files", "*.jpg")
-                                                            ))
-      
-    # Change label contents
-    label_file_explorer.configure(text="File Opened: "+filename)
-      
-      
-                                                                                                  
-# Create the root window
-window = Tk()
-  
-# Set window title
-window.title('File Explorer')
-  
-# Set window size
-window.geometry("500x500")
-  
-#Set window background color
-window.config(background = "white")
-  
-# Create a File Explorer label
-label_file_explorer = Label(window, 
-                            text = "File Explorer using Tkinter",
-                            width = 100, height = 4, 
-                            fg = "blue")
-  
-      
-button_explore = Button(window, 
-                        text = "Browse Files",
-                        command = browseFiles) 
-  
-button_exit = Button(window, 
-                     text = "Exit",
-                     command = exit) 
-  
-# Grid method is chosen for placing
-# the widgets at respective positions 
-# in a table like structure by
-# specifying rows and columns
-label_file_explorer.grid(column = 1, row = 1)
-  
-button_explore.grid(column = 1, row = 2)
-  
-button_exit.grid(column = 1,row = 3)
-  
-# Let the window wait for any events
-window.mainloop()
+# from tkscrolledframe import ScrolledFrame
+from scrolled_frame import ScrolledFrame
+
+
+# Create a root window
+root = Tk()
+
+# Create a ScrolledFrame widget
+sf = ScrolledFrame(root, width=640, height=480)
+sf.pack(side="top", expand=1, fill="both")
+
+# Bind the arrow keys and scroll wheel
+sf.bind_arrow_keys(root)
+sf.bind_scroll_wheel(root)
+
+# Create a frame within the ScrolledFrame
+inner_frame = sf.display_widget(Frame)
+
+# Add a bunch of widgets to fill some space
+num_rows = 16
+num_cols = 16
+for row in range(num_rows):
+    for column in range(num_cols):
+        w = Label(inner_frame,
+                  width=15,
+                  height=5,
+                  borderwidth=2,
+                  relief="groove",
+                  anchor="center",
+                  justify="center",
+                  text=str(row * num_cols + column))
+
+        w.grid(row=row,
+               column=column,
+               padx=4,
+               pady=4)
+
+# Start Tk's event loop
+root.mainloop()
