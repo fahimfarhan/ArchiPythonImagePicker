@@ -15,3 +15,15 @@ How can I build this thing?
 Python may ask you to install / upgrade "pillow" dependency.
 
     pip3 install pillow --upgrade
+
+## How to run python from maxscript?
+
+https://help.autodesk.com/view/MAXDEV/2024/ENU/?guid=MAXDEV_Python_executing_python_executing_python_from_maxscript_html
+
+Looks like you need to add this line:
+
+python.ExecuteFile @"C:\Program Files\Autodesk\3ds Max 2015\scripts\Python\demoBentCylinder.py"
+
+So in this case,
+
+python.ExecuteFile @"C:\Program Files\some\path\to\start_image_explorer.py"
