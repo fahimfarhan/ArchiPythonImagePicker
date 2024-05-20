@@ -9,3 +9,5 @@ How can I build this thing?
 * Recyclerview / list view / grid view
 * item click detection
 * on item click, open get models metadata (file name, file abs path, ...)
+
+/home/soumic/Pictures/Wallpapers
