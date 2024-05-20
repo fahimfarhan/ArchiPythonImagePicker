@@ -23,6 +23,8 @@ img_list=[]
 
 def on_radio_button_click(path):
   print(f"on radio clicked {path}")
+  Output.delete('1.0', END)  
+  Output.insert(END, path)
   pass
 
 
