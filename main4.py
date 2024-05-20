@@ -53,7 +53,10 @@ def Take_input(some_inner_frame):
       if not is_actually_image:
          continue   
       
-      img_list.append(ImageTk.PhotoImage(Image.open(image_path)))
+      original_img = Image.open(image_path)
+      resized = original_img.resize(( 100, 60 ))
+
+      img_list.append(ImageTk.PhotoImage(resized))
       n_col +=1
       index +=1
       if n_col > 9:
