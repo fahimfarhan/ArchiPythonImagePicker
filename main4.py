@@ -21,22 +21,32 @@ inner_frame = sf.display_widget(Frame)
 img_list=[]
 
 
+def on_radio_button_click(path):
+  print(f"on radio clicked {path}")
+  pass
+
+
 def Take_input(some_inner_frame):  
   #img_list = []
-  path = "/home/soumic/Pictures/Wallpapers" # my folder
+  path = inputtxt.get("1.0", "end-1c")
+  hardcoded_path = "/home/soumic/Pictures/Wallpapers" # my folder
   n_row = 0
   n_col = 0
   index = 0
   x = IntVar()
   for f in os.listdir(path):
-      img_list.append(ImageTk.PhotoImage(Image.open(os.path.join(path,f))))
+      image_path = os.path.join(path,f)
+      img_list.append(ImageTk.PhotoImage(Image.open(image_path)))
       n_col +=1
       index +=1
       if n_col > 9:
           n_row +=1
-          n_col = 1
+          n_col = 1 
       # radio_button = Label(some_inner_frame, width=100, height=60) # 
-      radio_button = Radiobutton(some_inner_frame, image=img_list[index-1], indicatoron=0, bd=2, variable = x, value = index, width=100, height = 60)
+      radio_button = Radiobutton(some_inner_frame, image=img_list[index-1], 
+                                 value = index, indicatoron=0, bd=2, variable = x,  width=100, height = 60,
+                                 command=lambda  m = image_path: on_radio_button_click(m)
+                                 )
       radio_button.grid(row=n_row, column = n_col)
       # radio_button.configure(image= img_list[index-1] )
   # root.update()
@@ -48,7 +58,7 @@ inputtxt = Text(root, height = 1,
                 bg = "light yellow")
  
 Output = Text(root, height = 5, 
-              width = 25, 
+              width = 100, 
               bg = "light cyan")
  
 Display = Button(root,

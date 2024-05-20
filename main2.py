@@ -8,7 +8,7 @@ from os.path import isfile, join
 root = Tk()
 root.geometry("300x300")
 root.title(" Q&A ")
- 
+
 def Take_input():
     INPUT = inputtxt.get("1.0", "end-1c")
     print(INPUT)
