@@ -32,7 +32,7 @@ def on_radio_button_click(path):
   pass
 
 
-def Take_input(some_inner_frame):
+def take_input(some_inner_frame):
   image_ext = [".jpg", ".png"]
 
   img_list = []
@@ -86,7 +86,7 @@ Output = Text(root, height = 5,
 Display = Button(root,
                  width = 20, 
                  text ="Show",
-                 command = lambda:Take_input(some_inner_frame=inner_frame))
+                 command = lambda:take_input(some_inner_frame=inner_frame))
  
 l.pack()
 inputtxt.pack()
