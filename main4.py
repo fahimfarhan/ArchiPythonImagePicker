@@ -18,26 +18,41 @@ sf.bind_scroll_wheel(root)
 # Create a frame within the ScrolledFrame
 inner_frame = sf.display_widget(Frame)
 
-img_list=[]
+g_img_list=[]
 
+
+user_selected_image_absolute_path = ""
 
 def on_radio_button_click(path):
-  print(f"on radio clicked {path}")
+  global user_selected_image_absolute_path
+  user_selected_image_absolute_path = path
+  print(f"on radio clicked {user_selected_image_absolute_path}")
   Output.delete('1.0', END)  
-  Output.insert(END, path)
+  Output.insert(END, user_selected_image_absolute_path)
   pass
 
 
-def Take_input(some_inner_frame):  
-  #img_list = []
+def Take_input(some_inner_frame):
+  image_ext = [".jpg", ".png"]
+
+  img_list = []
   path = inputtxt.get("1.0", "end-1c")
   hardcoded_path = "/home/soumic/Pictures/Wallpapers" # my folder
   n_row = 0
   n_col = 0
   index = 0
   x = IntVar()
-  for f in os.listdir(path):
+  for f in os.listdir(path):      
       image_path = os.path.join(path,f)
+      is_actually_image = False
+      for ext in image_ext:
+        if image_path.endswith(ext):
+           is_actually_image = True
+           break
+
+      if not is_actually_image:
+         continue   
+      
       img_list.append(ImageTk.PhotoImage(Image.open(image_path)))
       n_col +=1
       index +=1
@@ -46,12 +61,14 @@ def Take_input(some_inner_frame):
           n_col = 1 
       # radio_button = Label(some_inner_frame, width=100, height=60) # 
       radio_button = Radiobutton(some_inner_frame, image=img_list[index-1], 
-                                 value = index, indicatoron=0, bd=2, variable = x,  width=100, height = 60,
-                                 command=lambda  m = image_path: on_radio_button_click(m)
-                                 )
+                                value = index, indicatoron=0, bd=2, variable = x,  width=100, height = 60,
+                                command=lambda  m = image_path: on_radio_button_click(m)
+                                )
       radio_button.grid(row=n_row, column = n_col)
-      # radio_button.configure(image= img_list[index-1] )
+        # radio_button.configure(image= img_list[index-1] )
   # root.update()
+  global g_img_list
+  g_img_list = img_list
   pass
      
 l = Label(text = "What is 24 * 5 ? ")

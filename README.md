@@ -11,3 +11,7 @@ How can I build this thing?
 * on item click, open get models metadata (file name, file abs path, ...)
 
 /home/soumic/Pictures/Wallpapers
+
+Python may ask you to install / upgrade "pillow" dependency.
+
+    pip3 install pillow --upgrade
