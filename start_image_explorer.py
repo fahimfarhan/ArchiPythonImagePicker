@@ -1,8 +1,24 @@
+import pip
+
+def import_or_install(package):
+    try:
+        __import__(package)
+    except ImportError as ie:
+        print(f"Itry to install {ie}")
+        pip.main(['install', package])
+
+
+import_or_install("tk")
+import_or_install("pillow")
+
+
 from tkinter import *
 import os
 from PIL import ImageTk, Image
 from scrolled_frame import ScrolledFrame
 # from tkscrolledframe import ScrolledFrame
+
+
 
 
 root = Tk()
@@ -37,7 +53,6 @@ def take_input(some_inner_frame):
 
   img_list = []
   path = inputtxt.get("1.0", "end-1c")
-  hardcoded_path = "/home/soumic/Pictures/Wallpapers" # my folder
   n_row = 0
   n_col = 0
   index = 0
@@ -74,7 +89,7 @@ def take_input(some_inner_frame):
   g_img_list = img_list
   pass
      
-l = Label(text = "What is 24 * 5 ? ")
+l = Label(text = "Please enter the directory path: ")
 inputtxt = Text(root, height = 1,
                 width = 100,
                 bg = "light yellow")
